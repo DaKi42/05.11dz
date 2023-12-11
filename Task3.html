@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <script>
+    class Time {
+      constructor(hours, minutes, seconds) {
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
+      }
+
+      displayTime() {
+        console.log(`${this.hours}:${this.minutes}:${this.seconds}`);
+      }
+
+      addSeconds(secondsToAdd) {
+        let totalSeconds = this.hours * 3600 + this.minutes * 60 + this.seconds + secondsToAdd;
+        this.hours = Math.floor(totalSeconds / 3600) % 24;
+        this.minutes = Math.floor((totalSeconds % 3600) / 60);
+        this.seconds = totalSeconds % 60;
+      }
+
+      addMinutes(minutesToAdd) {
+        let totalMinutes = this.hours * 60 + this.minutes + minutesToAdd;
+        this.hours = Math.floor(totalMinutes / 60) % 24;
+        this.minutes = totalMinutes % 60;
+      }
+
+      addHours(hoursToAdd) {
+        this.hours = (this.hours + hoursToAdd) % 24;
+      }
+    }
+
+    let currentTime = new Time(20, 30, 45);
+
+    currentTime.displayTime();
+
+    currentTime.addSeconds(30);
+    console.log("Добавление 30 секунд:");
+    currentTime.displayTime();
+
+    // currentTime.addMinutes(15);
+    // console.log("Добавление 15 минут:");
+    // currentTime.displayTime();
+
+    // currentTime.addHours(2);
+    // console.log("Добавление 2 часов:");
+    // currentTime.displayTime();
+  </script>
+</body>
+</html>

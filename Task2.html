@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <script>
+    class Fraction {
+      constructor(numerator, denominator) {
+        this.numerator = numerator;
+        this.denominator = denominator;
+      }
+
+      add(otherFraction) {
+        let resultNumerator = this.numerator * otherFraction.denominator + otherFraction.numerator * this.denominator;
+        let resultDenominator = this.denominator * otherFraction.denominator;
+        return new Fraction(resultNumerator, resultDenominator);
+      }
+
+      subtract(otherFraction) {
+        let resultNumerator = this.numerator * otherFraction.denominator - otherFraction.numerator * this.denominator;
+        let resultDenominator = this.denominator * otherFraction.denominator;
+        return new Fraction(resultNumerator, resultDenominator);
+      }
+
+      multiply(otherFraction) {
+        let resultNumerator = this.numerator * otherFraction.numerator;
+        let resultDenominator = this.denominator * otherFraction.denominator;
+        return new Fraction(resultNumerator, resultDenominator);
+      }
+
+      divide(otherFraction) {
+        let resultNumerator = this.numerator * otherFraction.denominator;
+        let resultDenominator = this.denominator * otherFraction.numerator;
+        return new Fraction(resultNumerator, resultDenominator);
+      }
+
+      reduce() {
+        let greatestDivisor = function(a, b) {
+          if (b === 0) {
+            return a;
+          } else {
+            return greatestDivisor(b, a % b);
+          }
+        };
+
+        let commonDivisor = greatestDivisor(this.numerator, this.denominator);
+        return new Fraction(this.numerator / commonDivisor, this.denominator / commonDivisor);
+      }
+
+      toString() {
+        return `${this.numerator}/${this.denominator}`;
+      }
+    }
+
+    let fraction1 = new Fraction(4, 8);
+    let fraction2 = new Fraction(3, 5);
+
+    let sum = fraction1.add(fraction2);
+    console.log("Сумма:", sum.reduce().toString());
+
+    let difference = fraction1.subtract(fraction2);
+    console.log("Вычитание:", difference.reduce().toString());
+
+    let product = fraction1.multiply(fraction2);
+    console.log("Умножение:", product.reduce().toString());
+
+    let divide2 = fraction1.divide(fraction2);
+    console.log("Деление:", divide2.reduce().toString());
+  </script>
+</body>
+</html>
